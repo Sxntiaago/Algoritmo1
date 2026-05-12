@@ -189,5 +189,5 @@ def mostrar_categorias():
         productos_en_cat = len(sistema.categorias[categoria])
         print(f"{i}. {categoria} ({productos_en_cat} productos)")
 
-    print(f"\n📊 Total de categorías: {len(categorias)}")
-    break
+        print(f"\n📊 Total de categorías: {len(categorias)}")
+        break

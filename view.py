@@ -131,7 +131,7 @@ class LoginWindow:
             with open(log, "r", encoding="utf-8") as f:
                 usuarios = json.load(f)
             
-            if usuario in usuarios and usuarios[usuario] == password:
+            if usuario in usuarios and usuarios[usuario].get("contrasena") == password:
                 messagebox.showinfo("Éxito", f"¡Bienvenido {usuario}!")
                 self.root.destroy()
                 # Abrir menú principal después del login exitoso

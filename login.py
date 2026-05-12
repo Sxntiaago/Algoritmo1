@@ -23,7 +23,7 @@ def login():
             user_login = input("usuario: ").strip()
             password_login = input("contraseña: ").strip()
 
-            if user_login in usuarios and usuarios[user_login] == password_login:
+            if user_login in usuarios and usuarios[user_login].get("contrasena") == password_login:
                 print("Bienvenido")
                 return True
             else:
@@ -39,7 +39,8 @@ def registrar():
         print("username ocupado")
     elif password != password_confirm:
         print("Las contraseñas no coinciden")
-    elif usuarios[user] == password and password == password_confirm:
+    else:
+        usuarios[user] = {"user": user, "contrasena": password, "rol": "empleado"}  # Assuming default rol
         with open(log, "w", encoding="utf-8") as f:
-            json.dump(usuarios, f , indent=4)
-    print("Usuario creado")
+            json.dump(usuarios, f, indent=4)
+        print("Usuario creado")

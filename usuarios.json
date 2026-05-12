@@ -1,3 +1,17 @@
 {
-    "123": "123"
+    "Admin123": {
+        "user": "Admin123",
+        "contrasena": "123",
+        "rol": "admin"
+    },
+    "empleado123": {
+        "user": "empleado123",
+        "contrasena": "123",
+        "rol": "empleado"
+    },
+    "123": {
+        "user": "123",
+        "contrasena": "123",
+        "rol": "empleado"
+    }
 }
