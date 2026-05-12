@@ -17,7 +17,12 @@ def menu_Inventario():
         opcion = input("Selecciona una opción: ")
 
         if opcion == "1":
-            agregar_producto_interactivo()
+            nom = input("Nombre: ")
+            pre = float(input("Precio: "))
+            cant = int(input("Cantidad: "))
+            nuevo = Producto(nom, pre, cant, prov_general)
+            sistema.agregar(nuevo)
+            print("Producto agregado.")
 
         elif opcion == "2":
             sistema.mostrar_inventario()
@@ -185,4 +190,4 @@ def mostrar_categorias():
         print(f"{i}. {categoria} ({productos_en_cat} productos)")
 
     print(f"\n📊 Total de categorías: {len(categorias)}")
-            break
+    break
