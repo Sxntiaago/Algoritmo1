@@ -1,0 +1,28 @@
+{
+    "proveedores": [
+        {
+            "nombre": "Distribuidora Central",
+            "telefono": "555-0123"
+        }
+    ],
+    "categorias": {
+        "Alimentos": [
+            {
+                "nombre": "Arroz",
+                "precio": 3500.0,
+                "cantidad": 50,
+                "proveedor": "Distribuidora Central",
+                "categoria": "Alimentos"
+            }
+        ],
+        "Lácteos": [
+            {
+                "nombre": "Leche",
+                "precio": 4200.0,
+                "cantidad": 20,
+                "proveedor": "Distribuidora Central",
+                "categoria": "Lácteos"
+            }
+        ]
+    }
+}

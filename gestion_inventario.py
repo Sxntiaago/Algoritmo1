@@ -2,11 +2,8 @@ from producto import Producto
 from inventario import Inventario
 from proveedor import Proveedor
 
+# Instancia global del sistema (se cargará desde JSON)
 sistema = Inventario()
-
-prov_general = Proveedor("Distribuidora Central", "555-0123")
-sistema.agregar(Producto("Arroz", 3500.0, 50, prov_general))
-sistema.agregar(Producto("Leche", 4200.0, 20, prov_general))
 
 def menu_Inventario():
     while True:
@@ -20,32 +17,172 @@ def menu_Inventario():
         opcion = input("Selecciona una opción: ")
 
         if opcion == "1":
-            nom = input("Nombre: ")
-            pre = float(input("Precio: "))
-            cant = int(input("Cantidad: "))
-            nuevo = Producto(nom, pre, cant, prov_general)
-            sistema.agregar(nuevo)
-            print("Producto agregado.")
+            agregar_producto_interactivo()
 
         elif opcion == "2":
             sistema.mostrar_inventario()
 
         elif opcion == "3":
-            sistema.mostrar_inventario()
-            nom = input("\n¿Qué producto quieres editar?: ")
-            encontrado = sistema.buscar_producto(nom)
-            
-            if encontrado:
-                pre = float(input("Nuevo precio: "))
-                cant = int(input("Nueva cantidad: "))
-                sistema.editar(encontrado, pre, cant)
-            else:
-                print("No existe.")
+            mostrar_por_categoria()
 
         elif opcion == "4":
-            sistema.mostrar_inventario()
-            nom = input("\nNombre a eliminar: ")
-            sistema.eliminar(nom)
+            editar_producto_interactivo()
 
         elif opcion == "5":
+            eliminar_producto_interactivo()
+
+        elif opcion == "6":
+            mostrar_categorias()
+
+        elif opcion == "7":
+            print("👋 Regresando al menú principal...")
+            break
+
+        else:
+            print("❌ Opción no válida. Intente nuevamente.")
+
+        input("\nPresione Enter para continuar...")
+
+def agregar_producto_interactivo():
+    """Agrega un producto pidiendo datos al usuario"""
+    print("\n➕ AGREGAR NUEVO PRODUCTO")
+    print("-" * 30)
+
+    try:
+        # Datos del producto
+        nombre = input("Nombre del producto: ").strip()
+        if not nombre:
+            print("❌ El nombre no puede estar vacío.")
+            return
+
+        precio = float(input("Precio: "))
+        if precio <= 0:
+            print("❌ El precio debe ser mayor a 0.")
+            return
+
+        cantidad = int(input("Cantidad en stock: "))
+        if cantidad < 0:
+            print("❌ La cantidad no puede ser negativa.")
+            return
+
+        categoria = input("Categoría: ").strip()
+        if not categoria:
+            print("❌ La categoría no puede estar vacía.")
+            return
+
+        # Datos del proveedor
+        nombre_proveedor = input("Nombre del proveedor: ").strip()
+        telefono_proveedor = input("Teléfono del proveedor: ").strip()
+
+        # Crear proveedor (o usar existente)
+        proveedor = None
+        for p in sistema.proveedores:
+            if p.nombre.lower() == nombre_proveedor.lower():
+                proveedor = p
+                break
+
+        if not proveedor:
+            proveedor = Proveedor(nombre_proveedor, telefono_proveedor)
+            print(f"✅ Nuevo proveedor '{nombre_proveedor}' registrado.")
+
+        # Crear y agregar producto
+        nuevo_producto = Producto(nombre, precio, cantidad, proveedor, categoria)
+        sistema.agregar(nuevo_producto)
+
+        print(f"✅ Producto '{nombre}' agregado exitosamente en categoría '{categoria}'.")
+
+    except ValueError as e:
+        print(f"❌ Error en los datos ingresados: {e}")
+    except Exception as e:
+        print(f"❌ Error al agregar producto: {e}")
+
+def mostrar_por_categoria():
+    """Muestra productos filtrados por categoría"""
+    categorias = sistema.obtener_categorias()
+
+    if not categorias:
+        print("📭 No hay categorías disponibles.")
+        return
+
+    print("\n📁 CATEGORÍAS DISPONIBLES:")
+    for i, cat in enumerate(categorias, 1):
+        print(f"{i}. {cat}")
+
+    try:
+        opcion = int(input("\nSeleccione categoría (número): "))
+        if 1 <= opcion <= len(categorias):
+            categoria_seleccionada = categorias[opcion - 1]
+            sistema.mostrar_categoria(categoria_seleccionada)
+        else:
+            print("❌ Opción no válida.")
+    except ValueError:
+        print("❌ Ingrese un número válido.")
+
+def editar_producto_interactivo():
+    """Edita un producto existente"""
+    print("\n✏️ EDITAR PRODUCTO")
+    print("-" * 20)
+
+    sistema.mostrar_inventario()
+    nombre = input("\nNombre del producto a editar: ").strip()
+
+    producto = sistema.buscar_producto(nombre)
+    if not producto:
+        print(f"❌ No se encontró el producto '{nombre}'.")
+        return
+
+    print(f"\nProducto encontrado: {producto.nombre}")
+    print(f"Categoría actual: {producto.categoria}")
+    print(f"Precio actual: ${producto.precio:,.0f}")
+    print(f"Stock actual: {producto.cantidad}")
+
+    try:
+        nuevo_precio = float(input("Nuevo precio (Enter para mantener actual): ") or producto.precio)
+        nueva_cantidad = int(input("Nueva cantidad (Enter para mantener actual): ") or producto.cantidad)
+        nueva_categoria = input(f"Nueva categoría (Enter para mantener '{producto.categoria}'): ").strip() or producto.categoria
+
+        if nuevo_precio <= 0:
+            print("❌ El precio debe ser mayor a 0.")
+            return
+
+        if nueva_cantidad < 0:
+            print("❌ La cantidad no puede ser negativa.")
+            return
+
+        sistema.editar(producto, nuevo_precio, nueva_cantidad, nueva_categoria)
+        print("✅ Producto actualizado exitosamente.")
+
+    except ValueError as e:
+        print(f"❌ Error en los datos: {e}")
+
+def eliminar_producto_interactivo():
+    """Elimina un producto"""
+    print("\n🗑️ ELIMINAR PRODUCTO")
+    print("-" * 20)
+
+    sistema.mostrar_inventario()
+    nombre = input("\nNombre del producto a eliminar: ").strip()
+
+    confirmar = input(f"¿Está seguro de eliminar '{nombre}'? (s/n): ").strip().lower()
+    if confirmar == 's':
+        sistema.eliminar(nombre)
+    else:
+        print("❌ Operación cancelada.")
+
+def mostrar_categorias():
+    """Muestra todas las categorías disponibles"""
+    categorias = sistema.obtener_categorias()
+
+    if not categorias:
+        print("📭 No hay categorías registradas.")
+        return
+
+    print("\n📁 CATEGORÍAS DISPONIBLES:")
+    print("=" * 30)
+    for i, categoria in enumerate(categorias, 1):
+        # Contar productos en cada categoría
+        productos_en_cat = len(sistema.categorias[categoria])
+        print(f"{i}. {categoria} ({productos_en_cat} productos)")
+
+    print(f"\n📊 Total de categorías: {len(categorias)}")
             break

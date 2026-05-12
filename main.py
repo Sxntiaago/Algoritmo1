@@ -3,16 +3,21 @@ from inventario import Inventario
 from proveedor import Proveedor
 from gestion_inventario import menu_Inventario
 from gestion_ventas import menu_Ventas 
-from login import login
+from view import LoginWindow
+import tkinter as tk
+
 
 sistema = Inventario()
 
+
 prov_general = Proveedor("Distribuidora Central", "555-0123")
-sistema.agregar(Producto("Arroz", 3500.0, 50, prov_general))
-sistema.agregar(Producto("Leche", 4200.0, 20, prov_general))
+sistema.agregar(Producto("Arroz", 3500.0, 50, prov_general, "Alimentos"))
+sistema.agregar(Producto("Leche", 4200.0, 20, prov_general, "Lácteos"))
 
-login()
-
+root = tk.Tk()
+LoginWindow(root)
+root.mainloop()
+print("Acceso concedido")
 while True:
     print("\n SISTEMA PRINCIPAL")
     print("1. Gestión inventario")
