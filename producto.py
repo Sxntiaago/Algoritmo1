@@ -22,7 +22,6 @@ class Producto:
 
     @classmethod
     def from_dict(cls, data, proveedores):
-        """Crea un producto desde un diccionario, buscando el proveedor por nombre"""
         proveedor = next((p for p in proveedores if p.nombre == data["proveedor"]), None)
         if not proveedor:
             proveedor = Proveedor(data["proveedor"], "Sin teléfono")

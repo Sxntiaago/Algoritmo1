@@ -48,7 +48,6 @@ def menu_Inventario():
         input("\nPresione Enter para continuar...")
 
 def agregar_producto_interactivo():
-    """Agrega un producto pidiendo datos al usuario"""
     print("\n➕ AGREGAR NUEVO PRODUCTO")
     print("-" * 30)
 
@@ -97,7 +96,6 @@ def agregar_producto_interactivo():
         print(f"❌ Error al agregar producto: {e}")
 
 def mostrar_por_categoria():
-    """Muestra productos filtrados por categoría"""
     categorias = sistema.obtener_categorias()
 
     if not categorias:
@@ -119,7 +117,6 @@ def mostrar_por_categoria():
         print("❌ Ingrese un número válido.")
 
 def editar_producto_interactivo():
-    """Edita un producto existente"""
     print("\n✏️ EDITAR PRODUCTO")
     print("-" * 20)
 
@@ -156,7 +153,6 @@ def editar_producto_interactivo():
         print(f"❌ Error en los datos: {e}")
 
 def eliminar_producto_interactivo():
-    """Elimina un producto"""
     print("\n🗑️ ELIMINAR PRODUCTO")
     print("-" * 20)
 
@@ -170,7 +166,6 @@ def eliminar_producto_interactivo():
         print("❌ Operación cancelada.")
 
 def mostrar_categorias():
-    """Muestra todas las categorías disponibles"""
     categorias = sistema.obtener_categorias()
 
     if not categorias:

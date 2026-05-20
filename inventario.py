@@ -12,12 +12,10 @@ class Inventario:
         self.cargar_inventario()
 
     def agregar_proveedor(self, proveedor):
-        """Agrega un proveedor si no existe"""
         if not any(p.nombre == proveedor.nombre for p in self.proveedores):
             self.proveedores.append(proveedor)
 
     def agregar(self, producto_nuevo):
-        """Agrega un producto al inventario"""
         self.agregar_proveedor(producto_nuevo.proveedor)
 
         if producto_nuevo.categoria not in self.categorias:
@@ -27,7 +25,6 @@ class Inventario:
         self.guardar_inventario()
 
     def mostrar_inventario(self):
-        """Muestra todo el inventario organizado por categorías"""
         print("\n" + "="*50)
         print("           INVENTARIO ACTUAL")
         print("="*50)
@@ -57,7 +54,6 @@ class Inventario:
         print("="*50)
 
     def mostrar_categoria(self, categoria):
-        """Muestra productos de una categoría específica"""
         if categoria not in self.categorias:
             print(f"No existe la categoría '{categoria}'")
             return
@@ -70,11 +66,9 @@ class Inventario:
             print()
 
     def obtener_categorias(self):
-        """Retorna lista de categorías disponibles"""
         return list(self.categorias.keys())
 
     def buscar_producto(self, nombre_producto):
-        """Busca un producto por nombre en todas las categorías"""
         for productos in self.categorias.values():
             for producto in productos:
                 if producto.nombre.lower() == nombre_producto.lower():
@@ -82,7 +76,6 @@ class Inventario:
         return None
 
     def buscar_por_categoria(self, nombre_producto, categoria=None):
-        """Busca un producto por nombre, opcionalmente filtrando por categoría"""
         if categoria and categoria in self.categorias:
             productos = self.categorias[categoria]
         else:
@@ -94,7 +87,6 @@ class Inventario:
         return None
 
     def eliminar(self, nombre_producto, categoria=None):
-        """Elimina un producto por nombre, opcionalmente de una categoría específica"""
         if categoria and categoria in self.categorias:
             productos = self.categorias[categoria]
         else:
@@ -120,7 +112,6 @@ class Inventario:
         return False
 
     def editar(self, producto_objeto, nuevo_precio, nueva_cantidad, nueva_categoria=None):
-        """Edita un producto existente"""
         for categoria, productos in self.categorias.items():
             if producto_objeto in productos:
                 producto_objeto.precio = nuevo_precio
@@ -144,7 +135,6 @@ class Inventario:
         return False
 
     def guardar_inventario(self):
-        """Guarda el inventario completo en un archivo JSON"""
         try:
             self.archivo_json.parent.mkdir(parents=True, exist_ok=True)
 
@@ -168,7 +158,6 @@ class Inventario:
             print(f"❌ Error al guardar inventario: {e}")
 
     def cargar_inventario(self):
-        """Carga el inventario desde un archivo JSON"""
         try:
             if not self.archivo_json.exists():
                 self.guardar_inventario()

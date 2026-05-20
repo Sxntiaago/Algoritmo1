@@ -303,7 +303,6 @@ class MainMenuWindow:
 
 
 class GestionInventarioWindow:
-    """Ventana para gestionar el inventario de productos"""
     def __init__(self, root, sistema):
         self.root = root
         self.sistema = sistema
@@ -496,7 +495,6 @@ class GestionInventarioWindow:
 
 
 class ProductoWindow:
-    """Ventana para agregar o editar un producto"""
     def __init__(self, root, sistema, callback=None, producto=None):
         self.root = root
         self.sistema = sistema
@@ -638,7 +636,6 @@ class ProductoWindow:
 
 
 class GestionVentasWindow:
-    """Ventana para gestionar ventas"""
     def __init__(self, root, sistema):
         self.root = root
         self.sistema = sistema
@@ -971,7 +968,6 @@ class GestionVentasWindow:
 
 
 class ProveedorWindow:
-    """Ventana para gestionar proveedores"""
     def __init__(self, root, sistema):
         self.root = root
         self.sistema = sistema
@@ -1152,7 +1148,6 @@ class ProveedorWindow:
 
 
 class UsuariosWindow:
-    """Ventana para gestionar usuarios"""
     def __init__(self, root):
         self.root = root
         self.archivo_usuarios = log
