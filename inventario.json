@@ -3,6 +3,10 @@
         {
             "nombre": "Distribuidora Central",
             "telefono": "555-0123"
+        },
+        {
+            "nombre": "pepito",
+            "telefono": "3015328140"
         }
     ],
     "categorias": {
@@ -10,70 +14,7 @@
             {
                 "nombre": "Arroz",
                 "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Alimentos"
-            },
-            {
-                "nombre": "Arroz",
-                "precio": 3500.0,
-                "cantidad": 50,
+                "cantidad": 48,
                 "proveedor": "Distribuidora Central",
                 "categoria": "Alimentos"
             }
@@ -82,70 +23,7 @@
             {
                 "nombre": "Leche",
                 "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
-                "proveedor": "Distribuidora Central",
-                "categoria": "Lácteos"
-            },
-            {
-                "nombre": "Leche",
-                "precio": 4200.0,
-                "cantidad": 20,
+                "cantidad": 3,
                 "proveedor": "Distribuidora Central",
                 "categoria": "Lácteos"
             }

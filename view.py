@@ -105,7 +105,6 @@ class LoginWindow:
         botones_frame = tk.Frame(main_frame, bg="#f0f0f0")
         botones_frame.pack(fill="x", pady=(20, 0))
         
-        # Botón Login
         btn_login = tk.Button(
             botones_frame,
             text="Iniciar Sesión",
@@ -134,7 +133,6 @@ class LoginWindow:
             
             if usuario in usuarios:
                 datos_usuario = usuarios[usuario]
-                # Soportar ambos formatos de datos
                 if isinstance(datos_usuario, dict):
                     contrasena_guardada = datos_usuario.get("contrasena")
                 else:
@@ -164,7 +162,8 @@ class MainMenuWindow:
         self.root = root
         self.sistema = sistema
         self.root.title("Sistema de Gestión de Inventario - Menú Principal")
-        self.root.geometry("500x400")
+        
+        self.root.geometry("500x650") 
         self.root.resizable(False, False)
         self.root.configure(bg="#f0f0f0")
 
@@ -180,11 +179,9 @@ class MainMenuWindow:
         self.root.geometry(f"{width}x{height}+{x}+{y}")
 
     def crear_interfaz(self):
-        # Frame principal
         main_frame = tk.Frame(self.root, bg="#f0f0f0")
-        main_frame.pack(fill="both", expand=True, padx=20, pady=20)
+        main_frame.pack(fill="both", expand=True, padx=20, pady=10)
 
-        # Título
         titulo = tk.Label(
             main_frame,
             text="MENÚ PRINCIPAL",
@@ -192,7 +189,7 @@ class MainMenuWindow:
             bg="#f0f0f0",
             fg="#333333"
         )
-        titulo.pack(pady=(0, 10))
+        titulo.pack(pady=(10, 5))
 
         subtitulo = tk.Label(
             main_frame,
@@ -201,13 +198,11 @@ class MainMenuWindow:
             bg="#f0f0f0",
             fg="#666666"
         )
-        subtitulo.pack(pady=(0, 30))
+        subtitulo.pack(pady=(0, 15))
 
-        # Frame para botones
         botones_frame = tk.Frame(main_frame, bg="#f0f0f0")
-        botones_frame.pack(fill="both", expand=True)
+        botones_frame.pack(fill="x")
 
-        # Botón Gestión Inventario
         btn_inventario = tk.Button(
             botones_frame,
             text="📦 Gestión de Inventario",
@@ -218,12 +213,11 @@ class MainMenuWindow:
             relief="flat",
             cursor="hand2",
             padx=20,
-            pady=15,
+            pady=10, 
             width=25
         )
-        btn_inventario.pack(pady=(10, 15))
+        btn_inventario.pack(pady=5)
 
-        # Botón Gestión Ventas
         btn_ventas = tk.Button(
             botones_frame,
             text="💰 Gestión de Ventas",
@@ -234,12 +228,11 @@ class MainMenuWindow:
             relief="flat",
             cursor="hand2",
             padx=20,
-            pady=15,
+            pady=10,
             width=25
         )
-        btn_ventas.pack(pady=(10, 15))
+        btn_ventas.pack(pady=5)
 
-        # Botón Gestión Proveedores
         btn_proveedores = tk.Button(
             botones_frame,
             text="🏭 Gestión de Proveedores",
@@ -250,12 +243,11 @@ class MainMenuWindow:
             relief="flat",
             cursor="hand2",
             padx=20,
-            pady=15,
+            pady=10,
             width=25
         )
-        btn_proveedores.pack(pady=(10, 15))
+        btn_proveedores.pack(pady=5)
 
-        # Botón Gestión Usuarios
         btn_usuarios = tk.Button(
             botones_frame,
             text="👥 Gestión de Usuarios",
@@ -266,14 +258,16 @@ class MainMenuWindow:
             relief="flat",
             cursor="hand2",
             padx=20,
-            pady=15,
+            pady=10,
             width=25
         )
-        btn_usuarios.pack(pady=(10, 15))
+        btn_usuarios.pack(pady=5)
 
-        # Botón Salir
+        salir_frame = tk.Frame(main_frame, bg="#f0f0f0")
+        salir_frame.pack(fill="x", pady=(20, 0))
+
         btn_salir = tk.Button(
-            botones_frame,
+            salir_frame,
             text="🚪 Salir",
             command=self.salir,
             font=("Arial", 12, "bold"),
@@ -282,10 +276,10 @@ class MainMenuWindow:
             relief="flat",
             cursor="hand2",
             padx=20,
-            pady=15,
+            pady=10,
             width=25
         )
-        btn_salir.pack(pady=(10, 15))
+        btn_salir.pack(pady=5)
 
     def abrir_gestion_inventario(self):
         gestion_root = tk.Toplevel(self.root)
@@ -331,7 +325,6 @@ class GestionInventarioWindow:
         self.root.geometry(f"{width}x{height}+{x}+{y}")
     
     def crear_interfaz(self):
-        # Frame superior con título
         titulo_frame = tk.Frame(self.root, bg="#2196F3")
         titulo_frame.pack(fill="x", padx=0, pady=0)
         
@@ -344,7 +337,6 @@ class GestionInventarioWindow:
         )
         titulo.pack(pady=10)
         
-        # Frame de botones
         botones_frame = tk.Frame(self.root, bg="#f0f0f0")
         botones_frame.pack(fill="x", padx=20, pady=10)
         
@@ -400,6 +392,19 @@ class GestionInventarioWindow:
         )
         btn_actualizar.pack(side="left", padx=5)
         
+        btn_salir = tk.Button(
+            botones_frame,
+            text="🚪 Salir",
+            command=self.salir,
+            font=("Arial", 10, "bold"),
+            bg="#f44336",
+            fg="white",
+            relief="flat",
+            padx=15,
+            pady=8
+        )
+        btn_salir.pack(side="right", padx=5)
+        
         btn_volver = tk.Button(
             botones_frame,
             text="⬅️ Volver",
@@ -413,11 +418,9 @@ class GestionInventarioWindow:
         )
         btn_volver.pack(side="right", padx=5)
         
-        # Frame para la tabla
         tabla_frame = tk.Frame(self.root, bg="white")
         tabla_frame.pack(fill="both", expand=True, padx=20, pady=10)
         
-        # Crear Treeview para tabla
         columns = ("Nombre", "Precio", "Cantidad", "Categoría", "Proveedor")
         self.tabla = ttk.Treeview(tabla_frame, columns=columns, height=20, show="headings")
         
@@ -430,12 +433,18 @@ class GestionInventarioWindow:
             else:
                 self.tabla.column(col, width=100)
         
-        # Scrollbar
         scrollbar = ttk.Scrollbar(tabla_frame, orient="vertical", command=self.tabla.yview)
         self.tabla.configure(yscroll=scrollbar.set)
         
         self.tabla.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
+    
+    def salir(self):
+        if messagebox.askyesno("Confirmar salida", "¿Estás seguro de que quieres salir de la aplicación?"):
+            if hasattr(self.root, "master") and self.root.master:
+                self.root.master.destroy()
+            else:
+                self.root.destroy()
     
     def actualizar_tabla(self):
         for item in self.tabla.get_children():
@@ -524,27 +533,22 @@ class ProductoWindow:
         )
         titulo.pack(pady=(0, 20))
         
-        # Nombre
         tk.Label(main_frame, text="Nombre:", font=("Arial", 10), bg="#f0f0f0").pack(anchor="w", pady=(10, 5))
         self.nombre_entry = tk.Entry(main_frame, font=("Arial", 10), width=40, relief="solid", borderwidth=1)
         self.nombre_entry.pack(fill="x", pady=(0, 15))
         
-        # Precio
         tk.Label(main_frame, text="Precio:", font=("Arial", 10), bg="#f0f0f0").pack(anchor="w", pady=(10, 5))
         self.precio_entry = tk.Entry(main_frame, font=("Arial", 10), width=40, relief="solid", borderwidth=1)
         self.precio_entry.pack(fill="x", pady=(0, 15))
         
-        # Cantidad
         tk.Label(main_frame, text="Cantidad:", font=("Arial", 10), bg="#f0f0f0").pack(anchor="w", pady=(10, 5))
         self.cantidad_entry = tk.Entry(main_frame, font=("Arial", 10), width=40, relief="solid", borderwidth=1)
         self.cantidad_entry.pack(fill="x", pady=(0, 15))
         
-        # Categoría
         tk.Label(main_frame, text="Categoría:", font=("Arial", 10), bg="#f0f0f0").pack(anchor="w", pady=(10, 5))
         self.categoria_entry = tk.Entry(main_frame, font=("Arial", 10), width=40, relief="solid", borderwidth=1)
         self.categoria_entry.pack(fill="x", pady=(0, 15))
         
-        # Proveedor
         tk.Label(main_frame, text="Proveedor:", font=("Arial", 10), bg="#f0f0f0").pack(anchor="w", pady=(10, 5))
         self.proveedor_var = tk.StringVar()
         proveedores = [p.nombre for p in self.sistema.proveedores]
@@ -552,12 +556,10 @@ class ProductoWindow:
         self.proveedor_combo = ttk.Combobox(main_frame, textvariable=self.proveedor_var, values=proveedores, width=37, state="readonly")
         self.proveedor_combo.pack(fill="x", pady=(0, 15))
         
-        # Teléfono Proveedor
         tk.Label(main_frame, text="Teléfono Proveedor:", font=("Arial", 10), bg="#f0f0f0").pack(anchor="w", pady=(10, 5))
         self.telefono_entry = tk.Entry(main_frame, font=("Arial", 10), width=40, relief="solid", borderwidth=1)
         self.telefono_entry.pack(fill="x", pady=(0, 15))
         
-        # Llenar campos si es edición
         if self.is_edit:
             self.nombre_entry.insert(0, self.producto.nombre)
             self.precio_entry.insert(0, str(self.producto.precio))
@@ -568,7 +570,6 @@ class ProductoWindow:
             self.nombre_entry.config(state="readonly")
             self.categoria_entry.config(state="readonly")
         
-        # Botones
         botones_frame = tk.Frame(main_frame, bg="#f0f0f0")
         botones_frame.pack(fill="x", pady=(20, 0))
         
@@ -661,7 +662,6 @@ class GestionVentasWindow:
         self.root.geometry(f"{width}x{height}+{x}+{y}")
     
     def crear_interfaz(self):
-        # Título
         titulo_frame = tk.Frame(self.root, bg="#4CAF50")
         titulo_frame.pack(fill="x", padx=0, pady=0)
         
@@ -674,11 +674,9 @@ class GestionVentasWindow:
         )
         titulo.pack(pady=10)
         
-        # Frame principal con dos columnas
         main_frame = tk.Frame(self.root, bg="#f0f0f0")
         main_frame.pack(fill="both", expand=True, padx=20, pady=10)
         
-        # COLUMNA IZQUIERDA - Productos disponibles
         izq_frame = tk.Frame(main_frame, bg="white", relief="solid", borderwidth=1)
         izq_frame.pack(side="left", fill="both", expand=True, padx=(0, 10))
         
@@ -705,13 +703,11 @@ class GestionVentasWindow:
         
         self.actualizar_productos()
         
-        # COLUMNA DERECHA - Carrito
         der_frame = tk.Frame(main_frame, bg="white", relief="solid", borderwidth=1)
         der_frame.pack(side="right", fill="both", expand=True, padx=(10, 0))
         
         tk.Label(der_frame, text="Carrito de Compras", font=("Arial", 12, "bold"), bg="white").pack(fill="x", padx=10, pady=10)
         
-        # Tabla del carrito
         carrito_frame = tk.Frame(der_frame, bg="white")
         carrito_frame.pack(fill="both", expand=True, padx=10, pady=(0, 10))
         
@@ -731,7 +727,6 @@ class GestionVentasWindow:
         self.tabla_carrito.pack(side="left", fill="both", expand=True)
         scrollbar_carrito.pack(side="right", fill="y")
         
-        # Información de la venta
         info_frame = tk.Frame(der_frame, bg="#f0f0f0")
         info_frame.pack(fill="x", padx=10, pady=10)
         
@@ -743,11 +738,9 @@ class GestionVentasWindow:
         self.factura_entry = tk.Entry(info_frame, font=("Arial", 10), width=30, relief="solid", borderwidth=1)
         self.factura_entry.pack(fill="x", pady=(0, 10))
         
-        # Total
         tk.Label(info_frame, text=f"TOTAL: ${self.total:,.2f}", font=("Arial", 12, "bold"), bg="#f0f0f0", fg="#4CAF50", name="total_label")
         tk.Label(info_frame, text=f"TOTAL: ${self.total:,.2f}", font=("Arial", 12, "bold"), bg="#f0f0f0", fg="#4CAF50").pack(anchor="e", pady=10)
         
-        # Botones
         botones_venta_frame = tk.Frame(self.root, bg="#f0f0f0")
         botones_venta_frame.pack(fill="x", padx=20, pady=10)
         
@@ -803,6 +796,19 @@ class GestionVentasWindow:
         )
         btn_limpiar.pack(side="right", padx=5)
         
+        btn_salir = tk.Button(
+            botones_venta_frame,
+            text="🚪 Salir",
+            command=self.salir,
+            font=("Arial", 10, "bold"),
+            bg="#f44336",
+            fg="white",
+            relief="flat",
+            padx=15,
+            pady=8
+        )
+        btn_salir.pack(side="right", padx=5)
+        
         btn_volver = tk.Button(
             botones_venta_frame,
             text="⬅️ Volver",
@@ -815,6 +821,13 @@ class GestionVentasWindow:
             pady=8
         )
         btn_volver.pack(side="right", padx=5)
+    
+    def salir(self):
+        if messagebox.askyesno("Confirmar salida", "¿Estás seguro de que quieres salir de la aplicación?"):
+            if hasattr(self.root, "master") and self.root.master:
+                self.root.master.destroy()
+            else:
+                self.root.destroy()
     
     def actualizar_productos(self):
         for item in self.tabla_productos.get_children():
@@ -839,13 +852,11 @@ class GestionVentasWindow:
         valores = self.tabla_productos.item(item, "values")
         nombre_producto = valores[0]
         
-        # Buscar producto
         producto = self.sistema.buscar_producto(nombre_producto)
         if not producto:
             messagebox.showerror("Error", "Producto no encontrado")
             return
         
-        # Pedir cantidad
         cantidad_window = tk.Toplevel(self.root)
         cantidad_window.title("Cantidad")
         cantidad_window.geometry("300x150")
@@ -866,7 +877,6 @@ class GestionVentasWindow:
                     messagebox.showwarning("Advertencia", f"Stock insuficiente. Disponible: {producto.cantidad}")
                     return
                 
-                # Agregar al carrito
                 subtotal = producto.precio * cantidad
                 self.carrito.append({
                     "producto": nombre_producto,
@@ -896,7 +906,6 @@ class GestionVentasWindow:
                 f"${item['subtotal']:,.2f}"
             ))
         
-        # Actualizar total
         for widget in self.root.winfo_children():
             if isinstance(widget, tk.Label) and "TOTAL" in widget.cget("text"):
                 widget.config(text=f"TOTAL: ${self.total:,.2f}")
@@ -931,7 +940,6 @@ class GestionVentasWindow:
             messagebox.showwarning("Advertencia", "Completa cliente y nro. factura")
             return
         
-        # Procesar la venta
         from ventas import Venta
         
         nueva_venta = Venta(factura, cliente)
@@ -954,7 +962,6 @@ class GestionVentasWindow:
         
         messagebox.showinfo("Venta Exitosa", mensaje)
         
-        # Limpiar
         self.carrito = []
         self.total = 0
         self.cliente_entry.delete(0, tk.END)
@@ -987,7 +994,6 @@ class ProveedorWindow:
         self.root.geometry(f"{width}x{height}+{x}+{y}")
     
     def crear_interfaz(self):
-        # Título
         titulo_frame = tk.Frame(self.root, bg="#FF9800")
         titulo_frame.pack(fill="x", padx=0, pady=0)
         
@@ -1000,7 +1006,6 @@ class ProveedorWindow:
         )
         titulo.pack(pady=10)
         
-        # Frame de botones
         botones_frame = tk.Frame(self.root, bg="#f0f0f0")
         botones_frame.pack(fill="x", padx=20, pady=10)
         
@@ -1030,6 +1035,19 @@ class ProveedorWindow:
         )
         btn_eliminar.pack(side="left", padx=5)
         
+        btn_salir = tk.Button(
+            botones_frame,
+            text="🚪 Salir",
+            command=self.salir,
+            font=("Arial", 10, "bold"),
+            bg="#f44336",
+            fg="white",
+            relief="flat",
+            padx=15,
+            pady=8
+        )
+        btn_salir.pack(side="right", padx=5)
+        
         btn_volver = tk.Button(
             botones_frame,
             text="⬅️ Volver",
@@ -1043,7 +1061,6 @@ class ProveedorWindow:
         )
         btn_volver.pack(side="right", padx=5)
         
-        # Frame para tabla
         tabla_frame = tk.Frame(self.root, bg="white")
         tabla_frame.pack(fill="both", expand=True, padx=20, pady=10)
         
@@ -1059,6 +1076,13 @@ class ProveedorWindow:
         
         self.tabla.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
+    
+    def salir(self):
+        if messagebox.askyesno("Confirmar salida", "¿Estás seguro de que quieres salir de la aplicación?"):
+            if hasattr(self.root, "master") and self.root.master:
+                self.root.master.destroy()
+            else:
+                self.root.destroy()
     
     def actualizar_tabla(self):
         for item in self.tabla.get_children():
@@ -1081,7 +1105,6 @@ class ProveedorWindow:
         nombre_entry.pack(padx=20, fill="x")
         
         tk.Label(ventana, text="Teléfono:", font=("Arial", 10)).pack(anchor="w", padx=20, pady=(20, 5))
-        # Validación para solo números
         vcmd = (ventana.register(lambda P: P.isdigit() or P == ""), '%S')
         telefono_entry = tk.Entry(ventana, font=("Arial", 10), width=30, validate='key', validatecommand=vcmd)
         telefono_entry.pack(padx=20, fill="x")
@@ -1096,7 +1119,6 @@ class ProveedorWindow:
                 messagebox.showwarning("Advertencia", "Completa todos los campos")
                 return
             
-            # Verificar si ya existe
             if any(p.nombre.lower() == nombre.lower() for p in self.sistema.proveedores):
                 messagebox.showwarning("Advertencia", "El proveedor ya existe")
                 return
@@ -1153,7 +1175,6 @@ class UsuariosWindow:
         self.root.geometry(f"{width}x{height}+{x}+{y}")
     
     def crear_interfaz(self):
-        # Título
         titulo_frame = tk.Frame(self.root, bg="#9C27B0")
         titulo_frame.pack(fill="x", padx=0, pady=0)
         
@@ -1166,7 +1187,6 @@ class UsuariosWindow:
         )
         titulo.pack(pady=10)
         
-        # Botones
         botones_frame = tk.Frame(self.root, bg="#f0f0f0")
         botones_frame.pack(fill="x", padx=20, pady=10)
         
@@ -1209,6 +1229,19 @@ class UsuariosWindow:
         )
         btn_eliminar.pack(side="left", padx=5)
         
+        btn_salir = tk.Button(
+            botones_frame,
+            text="🚪 Salir",
+            command=self.salir,
+            font=("Arial", 10, "bold"),
+            bg="#f44336",
+            fg="white",
+            relief="flat",
+            padx=15,
+            pady=8
+        )
+        btn_salir.pack(side="right", padx=5)
+        
         btn_volver = tk.Button(
             botones_frame,
             text="⬅️ Volver",
@@ -1222,7 +1255,6 @@ class UsuariosWindow:
         )
         btn_volver.pack(side="right", padx=5)
         
-        # Tabla
         tabla_frame = tk.Frame(self.root, bg="white")
         tabla_frame.pack(fill="both", expand=True, padx=20, pady=10)
         
@@ -1238,6 +1270,13 @@ class UsuariosWindow:
         
         self.tabla.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
+    
+    def salir(self):
+        if messagebox.askyesno("Confirmar salida", "¿Estás seguro de que quieres salir de la aplicación?"):
+            if hasattr(self.root, "master") and self.root.master:
+                self.root.master.destroy()
+            else:
+                self.root.destroy()
     
     def actualizar_tabla(self):
         for item in self.tabla.get_children():

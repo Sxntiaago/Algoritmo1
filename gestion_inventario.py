@@ -2,9 +2,8 @@ from producto import Producto
 from inventario import Inventario
 from proveedor import Proveedor
 
-# Instancia global del sistema (se cargará desde JSON)
 sistema = Inventario()
-
+prov_general = Proveedor("Proveedor General", "555-0000")
 def menu_Inventario():
     while True:
         print("\n GESTION DE INVENTARIO")
@@ -54,7 +53,6 @@ def agregar_producto_interactivo():
     print("-" * 30)
 
     try:
-        # Datos del producto
         nombre = input("Nombre del producto: ").strip()
         if not nombre:
             print("❌ El nombre no puede estar vacío.")
@@ -75,11 +73,9 @@ def agregar_producto_interactivo():
             print("❌ La categoría no puede estar vacía.")
             return
 
-        # Datos del proveedor
         nombre_proveedor = input("Nombre del proveedor: ").strip()
         telefono_proveedor = input("Teléfono del proveedor: ").strip()
 
-        # Crear proveedor (o usar existente)
         proveedor = None
         for p in sistema.proveedores:
             if p.nombre.lower() == nombre_proveedor.lower():
@@ -90,7 +86,6 @@ def agregar_producto_interactivo():
             proveedor = Proveedor(nombre_proveedor, telefono_proveedor)
             print(f"✅ Nuevo proveedor '{nombre_proveedor}' registrado.")
 
-        # Crear y agregar producto
         nuevo_producto = Producto(nombre, precio, cantidad, proveedor, categoria)
         sistema.agregar(nuevo_producto)
 
@@ -185,7 +180,6 @@ def mostrar_categorias():
     print("\n📁 CATEGORÍAS DISPONIBLES:")
     print("=" * 30)
     for i, categoria in enumerate(categorias, 1):
-        # Contar productos en cada categoría
         productos_en_cat = len(sistema.categorias[categoria])
         print(f"{i}. {categoria} ({productos_en_cat} productos)")
 

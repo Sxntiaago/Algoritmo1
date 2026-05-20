@@ -1,17 +1,21 @@
 {
-    "Admin123": {
-        "user": "Admin123",
-        "contrasena": "123",
-        "rol": "admin"
-    },
-    "empleado123": {
-        "user": "empleado123",
-        "contrasena": "123",
-        "rol": "empleado"
-    },
-    "123": {
-        "user": "123",
-        "contrasena": "123",
-        "rol": "empleado"
-    }
+  "Admin123": {
+    "user": "Admin123",
+    "contrasena": "123",
+    "rol": "admin"
+  },
+  "empleado123": {
+    "user": "empleado123",
+    "contrasena": "123",
+    "rol": "empleado"
+  },
+  "123": {
+    "user": "123",
+    "contrasena": "123",
+    "rol": "empleado"
+  },
+  "777": {
+    "contrasena": "777",
+    "rol": "admin"
+  }
 }

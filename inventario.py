@@ -7,8 +7,8 @@ from pathlib import Path
 class Inventario:
     def __init__(self, archivo_json="inventario.json"):
         self.archivo_json = Path(archivo_json)
-        self.categorias = {}  # {categoria: [productos]}
-        self.proveedores = []  # Lista de proveedores para referencia
+        self.categorias = {}  
+        self.proveedores = []  
         self.cargar_inventario()
 
     def agregar_proveedor(self, proveedor):
@@ -102,7 +102,6 @@ class Inventario:
 
         for producto in productos:
             if producto.nombre.lower() == nombre_producto.lower():
-                # Encontrar la categoría correcta si no se especificó
                 if not categoria:
                     for cat, prods in self.categorias.items():
                         if producto in prods:
@@ -110,7 +109,6 @@ class Inventario:
                             break
 
                 self.categorias[categoria].remove(producto)
-                # Si la categoría queda vacía, la eliminamos
                 if not self.categorias[categoria]:
                     del self.categorias[categoria]
 
@@ -123,16 +121,14 @@ class Inventario:
 
     def editar(self, producto_objeto, nuevo_precio, nueva_cantidad, nueva_categoria=None):
         """Edita un producto existente"""
-        # Buscar el producto en todas las categorías
         for categoria, productos in self.categorias.items():
             if producto_objeto in productos:
                 producto_objeto.precio = nuevo_precio
                 producto_objeto.cantidad = nueva_cantidad
 
-                # Si cambia de categoría
                 if nueva_categoria and nueva_categoria != categoria:
                     productos.remove(producto_objeto)
-                    if not productos:  # Si la categoría queda vacía
+                    if not productos:  
                         del self.categorias[categoria]
 
                     if nueva_categoria not in self.categorias:
@@ -150,10 +146,8 @@ class Inventario:
     def guardar_inventario(self):
         """Guarda el inventario completo en un archivo JSON"""
         try:
-            # Crear directorio si no existe
             self.archivo_json.parent.mkdir(parents=True, exist_ok=True)
 
-            # Preparar datos para JSON
             datos = {
                 "proveedores": [
                     {"nombre": p.nombre, "telefono": p.telefono}
@@ -162,13 +156,11 @@ class Inventario:
                 "categorias": {}
             }
 
-            # Organizar productos por categoría
             for categoria, productos in self.categorias.items():
                 datos["categorias"][categoria] = [
                     producto.to_dict() for producto in productos
                 ]
 
-            # Guardar en JSON con indentación para legibilidad
             with open(self.archivo_json, 'w', encoding='utf-8') as f:
                 json.dump(datos, f, indent=4, ensure_ascii=False)
 
@@ -179,21 +171,18 @@ class Inventario:
         """Carga el inventario desde un archivo JSON"""
         try:
             if not self.archivo_json.exists():
-                # Si no existe el archivo, crear uno vacío
                 self.guardar_inventario()
                 return
 
             with open(self.archivo_json, 'r', encoding='utf-8') as f:
                 datos = json.load(f)
 
-            # Cargar proveedores
             self.proveedores = []
             if "proveedores" in datos:
                 for prov_data in datos["proveedores"]:
                     proveedor = Proveedor(prov_data["nombre"], prov_data["telefono"])
                     self.proveedores.append(proveedor)
 
-            # Cargar productos por categoría
             self.categorias = {}
             if "categorias" in datos:
                 for categoria, productos_data in datos["categorias"].items():
@@ -204,6 +193,5 @@ class Inventario:
 
         except Exception as e:
             print(f"❌ Error al cargar inventario: {e}")
-            # En caso de error, inicializar vacío
             self.categorias = {}
             self.proveedores = []

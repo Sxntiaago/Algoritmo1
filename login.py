@@ -3,7 +3,6 @@ import json
 import os
 from datetime import datetime
 from pathlib import Path
-#from main import 
 log = Path(r"C:\Users\santy\OneDrive\Escritorio\Algoritmo1\usuarios.json")
 
 
@@ -40,7 +39,7 @@ def registrar():
     elif password != password_confirm:
         print("Las contraseñas no coinciden")
     else:
-        usuarios[user] = {"user": user, "contrasena": password, "rol": "empleado"}  # Assuming default rol
+        usuarios[user] = {"user": user, "contrasena": password, "rol": "empleado"}
         with open(log, "w", encoding="utf-8") as f:
             json.dump(usuarios, f, indent=4)
         print("Usuario creado")

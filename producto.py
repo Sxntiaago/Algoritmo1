@@ -1,3 +1,4 @@
+from proveedor import Proveedor
 class Producto:
     def __init__(self, nombre, precio, cantidad, proveedor, categoria):
         self.nombre = nombre
@@ -24,7 +25,6 @@ class Producto:
         """Crea un producto desde un diccionario, buscando el proveedor por nombre"""
         proveedor = next((p for p in proveedores if p.nombre == data["proveedor"]), None)
         if not proveedor:
-            # Si no encuentra el proveedor, crea uno genérico
             proveedor = Proveedor(data["proveedor"], "Sin teléfono")
         return cls(
             data["nombre"],
