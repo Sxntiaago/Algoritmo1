@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-log = Path(r"C:\Users\santy\OneDrive\Escritorio\Algoritmo1\usuarios.json")
+log = Path(r"C:\Users\saaraujoa.CUC.000\Documents\GitHub\Algoritmo1\usuarios.json")
 
 
 if not log.exists():
@@ -497,13 +497,14 @@ class GestionInventarioWindow:
 class ProductoWindow:
     def __init__(self, root, sistema, callback=None, producto=None):
         self.root = root
+        self.root.geometry("400x650")
         self.sistema = sistema
         self.callback = callback
         self.producto = producto
         self.is_edit = producto is not None
         
         self.root.title("Editar Producto" if self.is_edit else "Agregar Producto")
-        self.root.geometry("500x500")
+        self.root.geometry("400x650")
         self.root.resizable(False, False)
         self.root.configure(bg="#f0f0f0")
         
@@ -626,6 +627,7 @@ class ProductoWindow:
             else:
                 nuevo = Producto(nombre, precio, cantidad, proveedor, categoria)
                 self.sistema.agregar(nuevo)
+                self.sistema.guardar_inventario()
                 messagebox.showinfo("Éxito", "Producto agregado")
             
             if self.callback:

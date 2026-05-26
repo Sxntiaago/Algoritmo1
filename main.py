@@ -2,6 +2,6 @@ from view import LoginWindow
 import tkinter as tk
 
 
-root = tk.Tk()
-LoginWindow(root)
-root.mainloop()
+app = tk.Tk()
+LoginWindow(app)
+app.mainloop()
