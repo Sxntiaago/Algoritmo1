@@ -23,9 +23,18 @@
             {
                 "nombre": "Leche",
                 "precio": 4200.0,
-                "cantidad": 3,
+                "cantidad": 333,
                 "proveedor": "Distribuidora Central",
                 "categoria": "Lácteos"
+            }
+        ],
+        "Azucar": [
+            {
+                "nombre": "Azucar",
+                "precio": 4200.0,
+                "cantidad": 123,
+                "proveedor": "pepito",
+                "categoria": "Azucar"
             }
         ]
     }
